@@ -18,3 +18,12 @@ typedef struct {
 
 Libro biblioteca[MAX_LIBROS];
 int   totalLibros = 0;
+
+void limpiarBuffer(void) {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+void imprimirLinea(void) {
+    printf("------------------------------------------------------------------\n");
+}
+
