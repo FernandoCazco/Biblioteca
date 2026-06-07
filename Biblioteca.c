@@ -202,3 +202,30 @@ void buscarLibro(void) {
         printf("  [!] Opcion no valida.\n");
     }
 }
+
+void actualizarEstado(void) {
+    printf("\n=== ACTUALIZAR ESTADO DE LIBRO ===\n");
+
+    if (totalLibros == 0) {
+        printf("  No hay libros registrados.\n");
+        return;
+    }
+
+    int id = leerEntero("  ID del libro a actualizar: ");
+    int idx = buscarIndicePorID(id);
+
+    if (idx == -1) {
+        printf("  [!] No se encontro un libro con ID %d.\n", id);
+        return;
+    }
+
+    printf("  Estado actual: %s\n", biblioteca[idx].estado);
+
+    if (strcmp(biblioteca[idx].estado, "Disponible") == 0) {
+        strcpy(biblioteca[idx].estado, "Prestado");
+    } else {
+        strcpy(biblioteca[idx].estado, "Disponible");
+    }
+
+    printf("  [OK] Estado actualizado a: %s\n", biblioteca[idx].estado);
+}
