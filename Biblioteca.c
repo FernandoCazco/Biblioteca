@@ -136,3 +136,69 @@ void mostrarLibros(void) {
     imprimirLinea();
     printf("  Total de libros registrados: %d / %d\n", totalLibros, MAX_LIBROS);
 }
+
+void buscarLibro(void) {
+    printf("\n=== BUSCAR LIBRO ===\n");
+
+    if (totalLibros == 0) {
+        printf("  No hay libros registrados.\n");
+        return;
+    }
+
+    printf("  Buscar por:\n");
+    printf("    1. ID\n");
+    printf("    2. Titulo\n");
+    int op = leerEntero("  Opcion: ");
+
+    if (op == 1) {
+        int id = leerEntero("  ID a buscar: ");
+        int idx = buscarIndicePorID(id);
+        if (idx == -1) {
+            printf("  [!] No se encontro un libro con ID %d.\n", id);
+        } else {
+            imprimirLinea();
+            printf("  ID              : %d\n",  biblioteca[idx].id);
+            printf("  Titulo          : %s\n",  biblioteca[idx].titulo);
+            printf("  Autor           : %s\n",  biblioteca[idx].autor);
+            printf("  Anio publicacion: %d\n",  biblioteca[idx].anio);
+            printf("  Estado          : %s\n",  biblioteca[idx].estado);
+            imprimirLinea();
+        }
+
+    } else if (op == 2) {
+        char termino[MAX_TITULO];
+        leerCadena("  Titulo (o parte del titulo): ", termino, MAX_TITULO);
+
+        int encontrados = 0;
+        for (int i = 0; i < totalLibros; i++) {
+            char tituloCopia[MAX_TITULO], terminoCopia[MAX_TITULO];
+            strcpy(tituloCopia, biblioteca[i].titulo);
+            strcpy(terminoCopia, termino);
+
+            for (int j = 0; tituloCopia[j]; j++)
+                if (tituloCopia[j] >= 'A' && tituloCopia[j] <= 'Z')
+                    tituloCopia[j] += 32;
+            for (int j = 0; terminoCopia[j]; j++)
+                if (terminoCopia[j] >= 'A' && terminoCopia[j] <= 'Z')
+                    terminoCopia[j] += 32;
+
+            if (strstr(tituloCopia, terminoCopia)) {
+                imprimirLinea();
+                printf("  ID              : %d\n",  biblioteca[i].id);
+                printf("  Titulo          : %s\n",  biblioteca[i].titulo);
+                printf("  Autor           : %s\n",  biblioteca[i].autor);
+                printf("  Anio publicacion: %d\n",  biblioteca[i].anio);
+                printf("  Estado          : %s\n",  biblioteca[i].estado);
+                imprimirLinea();
+                encontrados++;
+            }
+        }
+        if (encontrados == 0)
+            printf("  [!] No se encontro ningun libro con ese titulo.\n");
+        else
+            printf("  Se encontraron %d resultado(s).\n", encontrados);
+
+    } else {
+        printf("  [!] Opcion no valida.\n");
+    }
+}
