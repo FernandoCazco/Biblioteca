@@ -41,3 +41,35 @@ int buscarIndicePorID(int id) {
     return -1;
 }
 
+/* Lee un entero validado */
+int leerEntero(const char *mensaje) {
+    int valor;
+    char basura;
+    while (1) {
+        printf("%s", mensaje);
+        if (scanf("%d%c", &valor, &basura) == 2 && basura == '\n') {
+            return valor;
+        }
+        limpiarBuffer();
+        printf("  [!] Entrada invalida. Ingrese solo numeros enteros.\n");
+    }
+}
+
+void leerCadena(const char *mensaje, char *destino, int maxLen) {
+    while (1) {
+        printf("%s", mensaje);
+        if (fgets(destino, maxLen, stdin)) {
+            int len = strlen(destino);
+            if (len > 0 && destino[len - 1] == '\n')
+                destino[len - 1] = '\0';
+            if (strlen(destino) == 0) {
+                printf("  [!] El campo no puede estar vacio.\n");
+                continue;
+            }
+            return;
+        }
+        limpiarBuffer();
+        printf("  [!] Error de lectura. Intente de nuevo.\n");
+    }
+}
+
