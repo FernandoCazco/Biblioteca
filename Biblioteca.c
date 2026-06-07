@@ -263,3 +263,42 @@ void eliminarLibro(void) {
     totalLibros--;
     printf("  [OK] Libro eliminado exitosamente.\n");
 }
+
+void mostrarMenu(void) {
+    printf("\n");
+    imprimirLinea();
+    printf("    SISTEMA DE GESTION DE BIBLIOTECA\n");
+    imprimirLinea();
+    printf("    1. Registrar libro\n");
+    printf("    2. Mostrar todos los libros\n");
+    printf("    3. Buscar libro\n");
+    printf("    4. Actualizar estado de libro\n");
+    printf("    5. Eliminar libro\n");
+    printf("    6. Salir\n");
+    imprimirLinea();
+}
+
+int main(void) {
+    int opcion;
+
+    printf("  Bienvenido al sistema de gestion de la biblioteca.\n");
+
+    do {
+        mostrarMenu();
+        opcion = leerEntero("  Seleccione una opcion: ");
+
+        switch (opcion) {
+            case 1: registrarLibro();   break;
+            case 2: mostrarLibros();    break;
+            case 3: buscarLibro();      break;
+            case 4: actualizarEstado(); break;
+            case 5: eliminarLibro();    break;
+            case 6: printf("\n  Hasta luego!\n\n"); break;
+            default:
+                printf("  [!] Opcion no valida. Elija entre 1 y 6.\n");
+        }
+
+    } while (opcion != 6);
+
+    return 0;
+}
