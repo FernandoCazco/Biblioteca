@@ -8,3 +8,10 @@
 #define MAX_AUTOR     51
 #define MAX_ESTADO    11
 
+typedef struct {
+    int  id;
+    char titulo[MAX_TITULO];
+    char autor[MAX_AUTOR];
+    int  anio;
+    char estado[MAX_ESTADO];
+} Libro;
