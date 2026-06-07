@@ -27,3 +27,17 @@ void imprimirLinea(void) {
     printf("------------------------------------------------------------------\n");
 }
 
+int idExiste(int id) {
+    for (int i = 0; i < totalLibros; i++) {
+        if (biblioteca[i].id == id) return 1;
+    }
+    return 0;
+}
+
+int buscarIndicePorID(int id) {
+    for (int i = 0; i < totalLibros; i++) {
+        if (biblioteca[i].id == id) return i;
+    }
+    return -1;
+}
+
