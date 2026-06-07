@@ -229,3 +229,37 @@ void actualizarEstado(void) {
 
     printf("  [OK] Estado actualizado a: %s\n", biblioteca[idx].estado);
 }
+
+void eliminarLibro(void) {
+    printf("\n=== ELIMINAR LIBRO ===\n");
+
+    if (totalLibros == 0) {
+        printf("  No hay libros registrados.\n");
+        return;
+    }
+
+    int id = leerEntero("  ID del libro a eliminar: ");
+    int idx = buscarIndicePorID(id);
+
+    if (idx == -1) {
+        printf("  [!] No se encontro un libro con ID %d.\n", id);
+        return;
+    }
+
+    printf("  Libro a eliminar: \"%s\" (ID %d)\n",
+           biblioteca[idx].titulo, biblioteca[idx].id);
+    printf("  Confirmar eliminacion (s/n): ");
+    char conf[5];
+    fgets(conf, sizeof(conf), stdin);
+
+    if (conf[0] != 's' && conf[0] != 'S') {
+        printf("  Operacion cancelada.\n");
+        return;
+    }
+
+    for (int i = idx; i < totalLibros - 1; i++) {
+        biblioteca[i] = biblioteca[i + 1];
+    }
+    totalLibros--;
+    printf("  [OK] Libro eliminado exitosamente.\n");
+}
