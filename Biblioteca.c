@@ -73,3 +73,40 @@ void leerCadena(const char *mensaje, char *destino, int maxLen) {
     }
 }
 
+void registrarLibro(void) {
+    printf("\n=== REGISTRAR NUEVO LIBRO ===\n");
+
+    if (totalLibros >= MAX_LIBROS) {
+        printf("  [!] La biblioteca esta llena (maximo %d libros).\n", MAX_LIBROS);
+        return;
+    }
+
+    Libro nuevo;
+
+    while (1) {
+        nuevo.id = leerEntero("  ID del libro     : ");
+        if (nuevo.id <= 0) {
+            printf("  [!] El ID debe ser un numero positivo.\n");
+        } else if (idExiste(nuevo.id)) {
+            printf("  [!] Ya existe un libro con ese ID. Use otro.\n");
+        } else {
+            break;
+        }
+    }
+
+    leerCadena("  Titulo           : ", nuevo.titulo, MAX_TITULO);
+    leerCadena("  Autor            : ", nuevo.autor,  MAX_AUTOR);
+
+    while (1) {
+        nuevo.anio = leerEntero("  Anio publicacion : ");
+        if (nuevo.anio < 1000 || nuevo.anio > 2025) {
+            printf("  [!] Ingrese un anio valido (1000 - 2025).\n");
+        } else {
+            break;
+        }
+    }
+
+    strcpy(nuevo.estado, "Disponible");
+    biblioteca[totalLibros++] = nuevo;
+    printf("  [OK] Libro registrado exitosamente.\n");
+}
