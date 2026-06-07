@@ -15,3 +15,6 @@ typedef struct {
     int  anio;
     char estado[MAX_ESTADO];
 } Libro;
+
+Libro biblioteca[MAX_LIBROS];
+int   totalLibros = 0;
