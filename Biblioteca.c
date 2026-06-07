@@ -110,3 +110,29 @@ void registrarLibro(void) {
     biblioteca[totalLibros++] = nuevo;
     printf("  [OK] Libro registrado exitosamente.\n");
 }
+
+/* Mostrar todos los libros en formato tabla */
+void mostrarLibros(void) {
+    printf("\n=== LISTA DE LIBROS ===\n");
+
+    if (totalLibros == 0) {
+        printf("  No hay libros registrados.\n");
+        return;
+    }
+
+    imprimirLinea();
+    printf("| %-4s | %-30s | %-20s | %-4s | %-10s |\n",
+           "ID", "TITULO", "AUTOR", "ANIO", "ESTADO");
+    imprimirLinea();
+
+    for (int i = 0; i < totalLibros; i++) {
+        printf("| %-4d | %-30s | %-20s | %-4d | %-10s |\n",
+               biblioteca[i].id,
+               biblioteca[i].titulo,
+               biblioteca[i].autor,
+               biblioteca[i].anio,
+               biblioteca[i].estado);
+    }
+    imprimirLinea();
+    printf("  Total de libros registrados: %d / %d\n", totalLibros, MAX_LIBROS);
+}
